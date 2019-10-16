@@ -1,0 +1,29 @@
+src: # 源IP范围 ,即包体源IP, 包体会伪造成该IP
+  file: ./data/srcip.txt
+  start: 172.16.33.1
+  end: 172.16.33.255
+  port: # 源端口范围
+    start: 1000
+    end: 65535
+dst: # 目标IP范围,即 要将包发送到哪个IP地址去
+  file: ./data/dstip.txt
+  start: 172.16.33.2
+  end: 172.16.33.3
+  port: # 目标端口范围
+    start: 1000
+    end: 65535
+thread_count: 10 # 线程数
+timeout: 3600 # 每个源IP需要发多久 单位 秒
+packet:
+  protocol: true # tcp为true  upd为false
+  flag: # 包体标志位,为true则开启该标志位,false则关闭
+    syn: true
+    urg: false
+    ack: false
+    psh: false
+    rst: false
+    fin: false
+    seq: false
+  urgent: 0 # tcp紧急标志
+  body_file: ./data/sender.txt # 包体文件路径
+  body: sender   # 包体内容,默认读取包体文件,没有读取成功包体文件就读取这里的包体内容作为包体
